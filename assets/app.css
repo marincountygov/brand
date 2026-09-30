@@ -8,3 +8,28 @@
     4. Would other Marin apps likely need this too? Propose it for marin-ui instead
        of duplicating it here.
 */
+
+/* Directory grid/card base rules aren't in the shared bundle yet — marin-os
+   defines the same pair locally (its own inline <style>) for its app
+   directory, and this repo's "Brands" directory is the same pattern:
+   a grid of cards, one per entry, linking out to that entry's own page. */
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.directory-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each brand card's logo preview — contained, not cropped, since a logo's
+   own whitespace/proportions are part of what it's correct to show. */
+.brand-card__preview {
+  width: 100%;
+  max-height: 6rem;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 0.75rem;
+}
