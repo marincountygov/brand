@@ -1,41 +1,47 @@
-# APP_NAME
+# Marin Brand Center
 
-## About this app
+Logo, color, and typography reference for Marin brands — County of Marin today, with room for others (Marin County Parks, etc.) as they're added. Guides County staff, designers, and vendors in applying each brand consistently.
 
-- **Purpose:** APP_DESCRIPTION
-- **Audience:**
-- **Owner:** APP_OWNER
-- **Repo:** APP_REPO
-- **Status:** Not yet built
+- **Purpose:** One place to find a brand's approved logos, color palette, typography, and file-format guidance.
+- **Audience:** Public — County staff, designers, and vendors.
+- **Owner:** County of Marin
+- **Repo:** brand
+- **Status:** Prototype — migrated from `marin-docs/brand/`, the County of Marin content still carries that repo's own draft status.
 
-## Getting started
+## Architecture
 
-1. **Run locally** — open `index.html` directly in a browser, or serve the folder with a static web server. See [docs/development.md](docs/development.md).
-2. **Customize metadata** — replace every `APP_NAME`, `APP_DESCRIPTION`, `APP_OWNER`, and `APP_REPO` (the GitHub repo slug, e.g. `marin-cupa-fees` — used by the Updates section to know which repo's commits to show) placeholder in this file, in `index.html`, and in `marin.yml` (see "Project manifest" below).
-3. **Add app-specific functionality** — build the real workflow into `index.html`, `assets/app.css`, and `assets/app.js`, replacing the starter `#start` section. Leave the standard `#about`, `#security`, `#accessibility`, and `#updates` sections in place — see "Standard nav" below.
+Static, zero-build-step, same as every MarinOS app — except for the generators below, which are plain Node scripts run on demand, never as part of a deploy pipeline (the same pattern `marin-mentions`' and `marin-os`'s own generators use).
 
-## Standard nav
+```
+brands/<slug>/brand.json   →  scripts/build-brand.js <slug>  →  brands/<slug>/index.html
+brands/*/brand.json        →  scripts/build-all.js           →  every brand's index.html
+                                                                  + the "Brands" directory in this repo's own index.html
+```
 
-Every app built from this template ships with **About** and **Updates** in `#app-nav`; there is no default **Start** navigation item because the app's primary task is already the default view. The footer provides the complete local-app information navigation: the plain-text app name followed by **About**, **Security**, **Accessibility**, and **Updates**, with **MarinOS** on its own line as the link back to the MarinOS catalog. The app name is a label, not a link.
+Each brand owns one `brands/<slug>/` folder: its `brand.json` (the source of truth), the generated `index.html` (never hand-edited — it doesn't edit itself), its own `assets/`, and `source-documents/` if it was extracted from an existing print style guide.
 
-All of these destinations remain hash-routed sections within `index.html`: `#start`, `#about`, `#security`, `#accessibility`, and `#updates`. Each has `data-tab-section="…"`, and `shared/app-shell.js` handles showing/hiding sections from the URL hash. The app itself must be immediately functional in the default `#start` view; move explanatory/context material into `#about` rather than stacking it above the primary workflow. `#updates` needs no page-specific JavaScript beyond `data-updates-repo` and `data-app-name`; `#security` remains wired to `security.json`.
-4. **Use marin-ui** — prefer existing marin-ui components, tokens, and shell patterns before writing new CSS or JS. See `docs/development.md` for the bundle update process.
-5. **Test changes** — keyboard operation, reflow, light/dark contrast, and WAVE accessibility checks. See `docs/development.md`.
-6. **Deploy** — document the actual deployment process for this application in `docs/development.md` once it is established.
+## Adding a brand
 
-This project was created from `marin-app-template`, template version `TEMPLATE_VERSION` at time of creation (see `TEMPLATE_VERSION` in this repo). Existing applications do not automatically inherit later template changes — see that repo's `CHANGELOG.md` if you want to selectively adopt something. Shared UI fixes and additions come from `marin-ui` instead, via the sync process in `docs/development.md`.
+1. `mkdir brands/<slug>` (a short, URL-safe id, e.g. `parks`).
+2. Copy [`templates/brand.template.json`](templates/brand.template.json) to `brands/<slug>/brand.json` and fill it in — see [`brands/county-of-marin/brand.json`](brands/county-of-marin/brand.json) for a fully filled-out example, and [`schemas/brand.schema.json`](schemas/brand.schema.json) for what's actually required versus optional. Citation/source-document fields are optional — only fill them in if this brand really was extracted from an existing PDF guide.
+3. Add the logo/preview image files the `brand.json` references under `brands/<slug>/assets/`.
+4. `node scripts/validate-brand.js` — catches a malformed `brand.json` before it renders.
+5. `node scripts/build-all.js` — generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
 
-## Project manifest
+## Relationship to `marin-digital-standards/brand/`
 
-`marin.yml` is a small, machine-readable file describing this project's name, owner, status, and the `marin-ui`/template versions it's built on — for humans, scripts, and AI agents to read without parsing prose. Keep it current: update `platform.marin-ui` after every `sync-consumer.sh` run, and `project.status` as the app moves through its lifecycle (prototype → active → maintenance → deprecated → archived).
+Two different things, both already correctly separate, and this repo doesn't change that:
+
+- **`marin-digital-standards/brand/`** is the short, prescriptive *standard* for MarinOS's own digital products — what typeface digital UI actually uses, how gold is and isn't used as a color, etc.
+- **This repo** is the richer *reference library* for each brand's full identity — every logo variant, the complete color palette with print values, and (for County of Marin) the original 2014 print guide's own guidance, including where it's been deliberately superseded for digital use. A brand's `typography.digitalImplementation` field is exactly that cross-reference, already present in the migrated County of Marin content.
 
 ## Security
 
-This app ships with a starter `security.json`, `SECURITY.md`, and a `#security` section already wired up — see [`SECURITY.md`](SECURITY.md) for what to update (mainly `security.json`'s `review` and `exceptions[].owner` fields) once the app has a real owner and its first real review.
+This app ships with `security.json`, `SECURITY.md`, and a `#security` section — see [`SECURITY.md`](SECURITY.md). It uses the `public-web` profile, not the template's default `internal`, since this Brand Center explicitly serves external designers and vendors, not County staff alone.
 
 ## Related resources
 
 - [marin-digital-standards](https://github.com/marincountygov/marin-digital-standards) — accessibility, content, brand, and product-design requirements.
 - [marin-ui](https://github.com/marincountygov/marin-ui) — the implemented components, tokens, and app shell this project is built on.
-- [marin-skills](https://github.com/marincountygov/marin-skills) — AI workflows for building, reviewing, and maintaining Marin applications, including `marin-app-builder` and `app-maintainer`.
-- [`AGENTS.md`](AGENTS.md) — this file documents the template repo itself. A newly-created app should get its own app-shaped `AGENTS.md` instead (see any current app's, e.g. `marin-magic/AGENTS.md`, for the pattern to copy) — `marin-app-builder`'s build workflow creates one as part of scaffolding a new app.
+- [marin-skills](https://github.com/marincountygov/marin-skills) — AI workflows for building, reviewing, and maintaining Marin applications.
+- [marin-docs](https://github.com/marincountygov/marin-docs) — where this content lived before it was extracted into its own repo.

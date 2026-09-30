@@ -1,17 +1,17 @@
 schema: 1
 
 project:
-  name: APP_NAME
-  repo: APP_REPO
-  type: app
-  owner: APP_OWNER
-  audience: staff
+  name: Marin Brand Center
+  repo: brand
+  type: docs
+  owner: County of Marin
+  audience: public
   status: prototype
 
 platform:
-  marin-ui: 1.18.0
+  marin-ui: 1.18.1
   template: 1.2.1
 
 deployment:
   target: github-pages
-  url: https://marincountygov.github.io/APP_REPO/
+  url: https://marincountygov.github.io/brand/
