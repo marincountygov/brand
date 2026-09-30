@@ -1,0 +1,10 @@
+/*
+  App-specific styles only. Load order: vendor/pico.min.css -> shared/app-brand.css -> this file.
+
+  Before adding a rule here:
+    1. Does an existing marin-ui component or class already do this? Use it.
+    2. Does a marin-ui token (color, spacing, radius) cover it? Use the token.
+    3. Is this a small, genuinely app-specific addition? Add it below.
+    4. Would other Marin apps likely need this too? Propose it for marin-ui instead
+       of duplicating it here.
+*/

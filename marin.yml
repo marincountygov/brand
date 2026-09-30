@@ -1,0 +1,17 @@
+schema: 1
+
+project:
+  name: APP_NAME
+  repo: APP_REPO
+  type: app
+  owner: APP_OWNER
+  audience: staff
+  status: prototype
+
+platform:
+  marin-ui: 1.18.0
+  template: 1.2.1
+
+deployment:
+  target: github-pages
+  url: https://marincountygov.github.io/APP_REPO/
