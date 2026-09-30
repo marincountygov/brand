@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/marincountygov/brand/main/schemas/brand.schema.json",
+  "$id": "https://raw.githubusercontent.com/marincountygov/marin-brand/main/schemas/brand.schema.json",
   "title": "Marin Brand Center brand.json",
   "description": "Schema for one brand under brands/<slug>/brand.json. Extracted from the real County of Marin brand.json (originally marin-docs/brand/brand-center.json), not written in the abstract — see brands/county-of-marin/brand.json for a filled-out example and templates/brand.template.json for a starting point. Source-citation fields (page/section references back to an extracted PDF) are optional throughout: this schema has to fit a future brand authored directly, not just one extracted from a print guide.",
   "type": "object",
