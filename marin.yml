@@ -6,10 +6,10 @@ project:
   type: docs
   owner: County of Marin
   audience: public
-  status: prototype
+  status: alpha
 
 platform:
-  marin-ui: 1.18.2
+  marin-ui: 1.19.0
   template: 1.2.1
 
 deployment:
