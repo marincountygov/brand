@@ -6,7 +6,7 @@ Logo, color, and typography reference for Marin brands — County of Marin today
 - **Audience:** Public — County staff, designers, and vendors.
 - **Owner:** County of Marin
 - **Repo:** brand
-- **Status:** Prototype — migrated from `marin-docs/brand/`, the County of Marin content still carries that repo's own draft status.
+- **Status:** Alpha — migrated from `marin-docs/brand/`.
 
 ## Architecture
 
