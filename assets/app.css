@@ -1,5 +1,5 @@
 /*
-  App-specific styles only. Load order: vendor/pico.min.css -> shared/app-brand.css -> this file.
+  App-specific styles only. Load order: vendor/marinos/marinos.css -> this file.
 
   Before adding a rule here:
     1. Does an existing marin-ui component or class already do this? Use it.

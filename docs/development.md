@@ -14,27 +14,27 @@ Serve the folder with any static web server when browser origin behavior matters
 
 1. Replace every `APP_NAME`, `APP_DESCRIPTION`, and `APP_OWNER` placeholder — search the project for these tokens (`index.html`, `README.md`) and fill them in with real values.
 2. Update the page `<title>` and `<meta name="description">`.
-3. Replace the starter `#start` section in `index.html` with the real workflow. Keep the standard `#about`, `#security`, `#accessibility`, and `#updates` sections in `index.html`; these are hash-routed by `shared/app-shell.js`.
+3. Replace the starter `#start` section in `index.html` with the real workflow. Keep the standard `#about`, `#security`, `#accessibility`, and `#updates` sections in `index.html`; the App Shell (`<marin-app-info>`) generates and routes them.
 4. Keep **About** and **Updates** in the application header navigation, with no default **Start** item. Keep the footer app name as plain text followed by **About**, **Security**, **Accessibility**, and **Updates**, with **MarinOS** on its own line.
 5. Add app-specific styles to `assets/app.css` and app-specific behavior to `assets/app.js` — see the guidance comments in each file before adding new patterns.
 
-## Use marin-ui
+## Use the App Shell
 
-This project vendors a release of [`marin-ui`](https://github.com/marincountygov/marin-ui): `shared/app-brand.css`, `shared/app-shell.js`, `vendor/pico.min.css`, `vendor/fonts/Jost-wght.ttf`, and `BRAND_VERSION`.
+This project installs a release of the [MarinOS App Shell](https://github.com/marincountygov/marin-app-shell) in `vendor/marinos/`, with its fonts and icons in `vendor/fonts/` and `vendor/icons/`. The version is recorded in `platform.shell` in `marin.yml`.
 
-Prefer existing marin-ui components and tokens over new CSS. See `marin-ui`'s `docs/` (architecture, foundations, components, app shell, accessibility implementation) before adding new markup patterns.
+Prefer existing App Shell components and tokens over new CSS. See `marin-ui`'s `docs/` (architecture, foundations, components, app shell, accessibility implementation) before adding new markup patterns.
 
-### Updating the marin-ui bundle
+### Updating the App Shell
 
-Use marin-ui's own sync script from a local checkout of `marin-ui`:
+Use the installer from a local checkout of `marin-app-shell`:
 
 ```text
-./scripts/sync-consumer.sh /path/to/this-project
+bash scripts/install.sh /path/to/this-project
 ```
 
-This copies `BRAND_VERSION`, `shared/app-brand.css`, `shared/app-shell.js`, `vendor/pico.min.css`, and `vendor/fonts/Jost-wght.ttf`. Do not edit the vendored `shared/` or `vendor/` files directly — fixes belong in `marin-ui`, then re-sync.
+Do not edit files in `vendor/` directly — fixes belong in the App Shell, then re-install.
 
-After syncing, review the marin-ui changelog, check the resulting diff, and re-test the app before committing.
+After installing, review the App Shell changelog, check the resulting diff, and re-test the app before committing.
 
 ## Test changes
 

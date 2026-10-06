@@ -129,7 +129,6 @@
     }
   ],
   "publicSecurity": {
-    "profile": "For County staff, designers, and vendors",
     "lastReviewed": "2026-09-30",
     "controls": [
       "HTTPS",
